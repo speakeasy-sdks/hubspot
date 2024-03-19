@@ -1,0 +1,13 @@
+# BatchResponseSimplePublicObject
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `CompletedAt`                                                                    | [time.Time](https://pkg.go.dev/time#Time)                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `RequestedAt`                                                                    | [*time.Time](https://pkg.go.dev/time#Time)                                       | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `StartedAt`                                                                      | [time.Time](https://pkg.go.dev/time#Time)                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Links`                                                                          | map[string]*string*                                                              | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `Results`                                                                        | [][components.SimplePublicObject](../../models/components/simplepublicobject.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `Status`                                                                         | [components.Status](../../models/components/status.md)                           | :heavy_check_mark:                                                               | N/A                                                                              |

@@ -1,0 +1,9 @@
+# PostCrmV3ObjectsDealsBatchReadReadRequest
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `BatchReadInputSimplePublicObjectID`                                                                           | [components.BatchReadInputSimplePublicObjectID](../../models/components/batchreadinputsimplepublicobjectid.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `Archived`                                                                                                     | **bool*                                                                                                        | :heavy_minus_sign:                                                                                             | Whether to return only results that have been archived.                                                        |

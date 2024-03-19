@@ -1,0 +1,9 @@
+# CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Paging`                                                                                                         | [*components.ForwardPaging](../../models/components/forwardpaging.md)                                            | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `Results`                                                                                                        | [][components.SimplePublicObjectWithAssociations](../../models/components/simplepublicobjectwithassociations.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

@@ -1,99 +1,10 @@
 workflowVersion: 1.0.0
 sources:
-  webhooks:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/webhooks/v3
-  events:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/events/v3/events
-  communication-preferences:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/communication-preferences/v3
-  auth:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/oauth/v1
-  business-units:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/business-units/v3
-  analytics:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/events/v3/send
-  cms:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/domains
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/source-code
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/blogs/blog-posts
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/blogs/authors
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/url-redirects
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/performance
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/hubdb
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/blogs/tags
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/audit-logs
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/cms/v3/site-search
-  marketing:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/marketing/v3/marketing-events-beta
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/marketing/v3/transactional
-  automation:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/automation/v4/actions
-  conversations:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/conversations/v3/visitor-identification
-  crm:
-    inputs:
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/extensions/sales-objects/v1/object-types
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/products
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v4/associations
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/pipelines
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/extensions/accounting
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/companies
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/extensions/calling
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/quotes
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/deals
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/imports
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/schemas
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/properties
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/associations
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/owners
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/timeline
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/contacts
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/feedback_submissions
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/extensions/videoconferencing
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/tickets
-      - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/line_items
+    deals:
+        inputs:
+            - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/deals
 targets:
-  webhooks:
-    target: go
-    output: ./webhooks
-  events:
-    target: go
-    output: ./events
-  communication-preferences:
-    target: go
-    output: ./communication-preferences
-  auth:
-    target: go
-    output: ./auth
-  business-units:
-    target: go
-    output: ./business-units
-  analytics:
-    target: go
-    output: ./analytics
-  cms:
-    target: go
-    output: ./cms
-  marketing:
-    target: go
-    output: ./marketing
-  automation:
-    target: go
-    output: ./automation
-  conversations:
-    target: go
-    output: ./conversations
-  crm:
-    target: go
-    output: ./crm
+    deals:
+        target: go
+        source: deals
+        output: ./deals

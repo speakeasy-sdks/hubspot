@@ -1,0 +1,11 @@
+# BatchReadInputSimplePublicObjectID
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `PropertiesWithHistory`                                                              | []*string*                                                                           | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `IDProperty`                                                                         | **string*                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `Inputs`                                                                             | [][components.SimplePublicObjectID](../../models/components/simplepublicobjectid.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Properties`                                                                         | []*string*                                                                           | :heavy_check_mark:                                                                   | N/A                                                                                  |
