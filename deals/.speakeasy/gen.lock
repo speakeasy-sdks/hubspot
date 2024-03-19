@@ -3,10 +3,13 @@ id: c072afc9-65e8-4581-91a2-435738f3240c
 management:
   docChecksum: 035df3ed30ae2c318a2a548f3db114de
   docVersion: v3
-  speakeasyVersion: 1.209.3
+  speakeasyVersion: 1.210.0
   generationVersion: 2.281.2
-  releaseVersion: 0.0.2
-  configChecksum: 8421e20ebf823cde3068bbbb0b0f99f1
+  releaseVersion: 0.0.1
+  configChecksum: 01450468e1a473ddb12813e9ae119121
+  repoURL: https://github.com/speakeasy-sdks/hubspot.git
+  repoSubDirectory: deals
+  installationURL: https://github.com/speakeasy-sdks/hubspot/deals
 features:
   go:
     constsAndDefaults: 0.1.4

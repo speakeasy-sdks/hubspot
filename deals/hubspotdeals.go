@@ -145,9 +145,9 @@ func New(opts ...SDKOption) *HubSpotDeals {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v3",
-			SDKVersion:        "0.0.2",
+			SDKVersion:        "0.0.1",
 			GenVersion:        "2.281.2",
-			UserAgent:         "speakeasy-sdk/go 0.0.2 2.281.2 v3 github.com/speakeasy-sdks/hubspot-go/deals",
+			UserAgent:         "speakeasy-sdk/go 0.0.1 2.281.2 v3 github.com/speakeasy-sdks/hubspot-go/deals",
 			Hooks:             hooks.New(),
 		},
 	}

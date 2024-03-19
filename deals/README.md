@@ -20,7 +20,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ## SDK Installation
 
 ```bash
-go get github.com/speakeasy-sdks/hubspot-go/deals
+go get github.com/speakeasy-sdks/hubspot/deals
 ```
 <!-- End SDK Installation [installation] -->
 
