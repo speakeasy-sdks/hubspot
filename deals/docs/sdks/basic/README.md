@@ -27,16 +27,15 @@ import(
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.GetCrmV3ObjectsDealsDealIDGetByIDSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Basic.GetCrmV3ObjectsDealsDealIDGetByID(ctx, operations.GetCrmV3ObjectsDealsDealIDGetByIDRequest{
+    request := operations.GetCrmV3ObjectsDealsDealIDGetByIDRequest{
         DealID: "<value>",
-    }, operationSecurity)
+    }
+
+    security := operations.GetCrmV3ObjectsDealsDealIDGetByIDSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Basic.GetCrmV3ObjectsDealsDealIDGetByID(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }
@@ -80,16 +79,13 @@ import(
 
 func main() {
     s := deals.New()
-
-
-    var dealID string = "<value>"
-
-    operationSecurity := operations.DeleteCrmV3ObjectsDealsDealIDArchiveSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
+    security := operations.DeleteCrmV3ObjectsDealsDealIDArchiveSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
         }
 
+    var dealID string = "<value>"
     ctx := context.Background()
-    res, err := s.Basic.DeleteCrmV3ObjectsDealsDealIDArchive(ctx, operationSecurity, dealID)
+    res, err := s.Basic.DeleteCrmV3ObjectsDealsDealIDArchive(ctx, security, dealID)
     if err != nil {
         log.Fatal(err)
     }
@@ -126,15 +122,17 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"context"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
+    security := operations.PatchCrmV3ObjectsDealsDealIDUpdateSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
 
     var dealID string = "<value>"
 
@@ -150,13 +148,8 @@ func main() {
     }
 
     var idProperty *string = deals.String("<value>")
-
-    operationSecurity := operations.PatchCrmV3ObjectsDealsDealIDUpdateSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
     ctx := context.Background()
-    res, err := s.Basic.PatchCrmV3ObjectsDealsDealIDUpdate(ctx, operationSecurity, dealID, simplePublicObjectInput, idProperty)
+    res, err := s.Basic.PatchCrmV3ObjectsDealsDealIDUpdate(ctx, security, dealID, simplePublicObjectInput, idProperty)
     if err != nil {
         log.Fatal(err)
     }
@@ -202,14 +195,13 @@ import(
 
 func main() {
     s := deals.New()
+    request := operations.GetCrmV3ObjectsDealsGetPageRequest{}
 
-
-    operationSecurity := operations.GetCrmV3ObjectsDealsGetPageSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
+    security := operations.GetCrmV3ObjectsDealsGetPageSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
         }
-
     ctx := context.Background()
-    res, err := s.Basic.GetCrmV3ObjectsDealsGetPage(ctx, operations.GetCrmV3ObjectsDealsGetPageRequest{}, operationSecurity)
+    res, err := s.Basic.GetCrmV3ObjectsDealsGetPage(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }
@@ -246,22 +238,15 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsCreateSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Basic.PostCrmV3ObjectsDealsCreate(ctx, components.SimplePublicObjectInputForCreate{
+    request := components.SimplePublicObjectInputForCreate{
         Associations: []components.PublicAssociationsForObject{
             components.PublicAssociationsForObject{
                 Types: []components.AssociationSpec{
@@ -283,7 +268,13 @@ func main() {
             "dealstage": "presentationscheduled",
             "hubspot_owner_id": "910901",
         },
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsCreateSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Basic.PostCrmV3ObjectsDealsCreate(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }

@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsMergeMergeSecurity) GetPrivateApps() *string {
 }
 
 type PostCrmV3ObjectsDealsMergeMergeResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	SimplePublicObject *components.SimplePublicObject
 	Body               []byte

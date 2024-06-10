@@ -33,7 +33,7 @@ func (s *Basic) GetCrmV3ObjectsDealsDealIDGetByID(ctx context.Context, request o
 		Context:        ctx,
 		OperationID:    "get-/crm/v3/objects/deals/{dealId}_getById",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -68,7 +68,7 @@ func (s *Basic) GetCrmV3ObjectsDealsDealIDGetByID(ctx context.Context, request o
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -88,9 +88,11 @@ func (s *Basic) GetCrmV3ObjectsDealsDealIDGetByID(ctx context.Context, request o
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -141,6 +143,7 @@ func (s *Basic) GetCrmV3ObjectsDealsDealIDGetByID(ctx context.Context, request o
 	}
 
 	return res, nil
+
 }
 
 // DeleteCrmV3ObjectsDealsDealIDArchive - Archive
@@ -150,7 +153,7 @@ func (s *Basic) DeleteCrmV3ObjectsDealsDealIDArchive(ctx context.Context, securi
 		Context:        ctx,
 		OperationID:    "delete-/crm/v3/objects/deals/{dealId}_archive",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	request := operations.DeleteCrmV3ObjectsDealsDealIDArchiveRequest{
@@ -170,7 +173,7 @@ func (s *Basic) DeleteCrmV3ObjectsDealsDealIDArchive(ctx context.Context, securi
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -190,9 +193,11 @@ func (s *Basic) DeleteCrmV3ObjectsDealsDealIDArchive(ctx context.Context, securi
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -232,6 +237,7 @@ func (s *Basic) DeleteCrmV3ObjectsDealsDealIDArchive(ctx context.Context, securi
 	}
 
 	return res, nil
+
 }
 
 // PatchCrmV3ObjectsDealsDealIDUpdate - Update
@@ -241,13 +247,13 @@ func (s *Basic) PatchCrmV3ObjectsDealsDealIDUpdate(ctx context.Context, security
 		Context:        ctx,
 		OperationID:    "patch-/crm/v3/objects/deals/{dealId}_update",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	request := operations.PatchCrmV3ObjectsDealsDealIDUpdateRequest{
 		DealID:                  dealID,
-		SimplePublicObjectInput: simplePublicObjectInput,
 		IDProperty:              idProperty,
+		SimplePublicObjectInput: simplePublicObjectInput,
 	}
 
 	o := operations.Options{}
@@ -288,7 +294,7 @@ func (s *Basic) PatchCrmV3ObjectsDealsDealIDUpdate(ctx context.Context, security
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -308,9 +314,11 @@ func (s *Basic) PatchCrmV3ObjectsDealsDealIDUpdate(ctx context.Context, security
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -361,6 +369,7 @@ func (s *Basic) PatchCrmV3ObjectsDealsDealIDUpdate(ctx context.Context, security
 	}
 
 	return res, nil
+
 }
 
 // GetCrmV3ObjectsDealsGetPage - List
@@ -370,7 +379,7 @@ func (s *Basic) GetCrmV3ObjectsDealsGetPage(ctx context.Context, request operati
 		Context:        ctx,
 		OperationID:    "get-/crm/v3/objects/deals_getPage",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -405,7 +414,7 @@ func (s *Basic) GetCrmV3ObjectsDealsGetPage(ctx context.Context, request operati
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -425,9 +434,11 @@ func (s *Basic) GetCrmV3ObjectsDealsGetPage(ctx context.Context, request operati
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -478,6 +489,7 @@ func (s *Basic) GetCrmV3ObjectsDealsGetPage(ctx context.Context, request operati
 	}
 
 	return res, nil
+
 }
 
 // PostCrmV3ObjectsDealsCreate - Create
@@ -487,7 +499,7 @@ func (s *Basic) PostCrmV3ObjectsDealsCreate(ctx context.Context, request compone
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals_create",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -524,7 +536,7 @@ func (s *Basic) PostCrmV3ObjectsDealsCreate(ctx context.Context, request compone
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -544,9 +556,11 @@ func (s *Basic) PostCrmV3ObjectsDealsCreate(ctx context.Context, request compone
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -597,4 +611,5 @@ func (s *Basic) PostCrmV3ObjectsDealsCreate(ctx context.Context, request compone
 	}
 
 	return res, nil
+
 }

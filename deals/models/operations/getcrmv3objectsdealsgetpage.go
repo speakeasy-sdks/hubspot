@@ -95,7 +95,7 @@ func (o *GetCrmV3ObjectsDealsGetPageRequest) GetArchived() *bool {
 }
 
 type GetCrmV3ObjectsDealsGetPageResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	CollectionResponseSimplePublicObjectWithAssociationsForwardPaging *components.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
 	Body                                                              []byte

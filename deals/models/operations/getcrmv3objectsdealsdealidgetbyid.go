@@ -94,7 +94,7 @@ func (o *GetCrmV3ObjectsDealsDealIDGetByIDRequest) GetIDProperty() *string {
 }
 
 type GetCrmV3ObjectsDealsDealIDGetByIDResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	SimplePublicObjectWithAssociations *components.SimplePublicObjectWithAssociations
 	Body                               []byte

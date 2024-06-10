@@ -16,25 +16,24 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsMergeMergeSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.PublicObject.PostCrmV3ObjectsDealsMergeMerge(ctx, components.PublicMergeInput{
+    request := components.PublicMergeInput{
         ObjectIDToMerge: "<value>",
         PrimaryObjectID: "<value>",
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsMergeMergeSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.PublicObject.PostCrmV3ObjectsDealsMergeMerge(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }

@@ -110,17 +110,11 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
-func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
-	return func(context.Context) (interface{}, error) {
-		return security, nil
-	}
-}
-
 // WithSecurity configures the SDK to use the provided security details
 func WithSecurity(oauth2 string) SDKOption {
 	return func(sdk *HubSpotDeals) {
 		security := components.Security{Oauth2: &oauth2}
-		sdk.sdkConfiguration.Security = withSecurity(&security)
+		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
 	}
 }
 
@@ -145,9 +139,9 @@ func New(opts ...SDKOption) *HubSpotDeals {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v3",
-			SDKVersion:        "0.0.1",
-			GenVersion:        "2.281.2",
-			UserAgent:         "speakeasy-sdk/go 0.0.1 2.281.2 v3 github.com/speakeasy-sdks/hubspot-go/deals",
+			SDKVersion:        "0.1.0",
+			GenVersion:        "2.339.1",
+			UserAgent:         "speakeasy-sdk/go 0.1.0 2.339.1 v3 github.com/speakeasy-sdks/hubspot-go/deals",
 			Hooks:             hooks.New(),
 		},
 	}

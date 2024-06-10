@@ -32,12 +32,12 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchReadRead(ctx context.Context, security
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/batch/read_read",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	request := operations.PostCrmV3ObjectsDealsBatchReadReadRequest{
-		BatchReadInputSimplePublicObjectID: batchReadInputSimplePublicObjectID,
 		Archived:                           archived,
+		BatchReadInputSimplePublicObjectID: batchReadInputSimplePublicObjectID,
 	}
 
 	o := operations.Options{}
@@ -78,7 +78,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchReadRead(ctx context.Context, security
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -98,9 +98,11 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchReadRead(ctx context.Context, security
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -163,6 +165,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchReadRead(ctx context.Context, security
 	}
 
 	return res, nil
+
 }
 
 // PostCrmV3ObjectsDealsBatchArchiveArchive - Archive a batch of deals by ID
@@ -171,7 +174,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchArchiveArchive(ctx context.Context, re
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/batch/archive_archive",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
@@ -193,7 +196,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchArchiveArchive(ctx context.Context, re
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -213,9 +216,11 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchArchiveArchive(ctx context.Context, re
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -255,6 +260,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchArchiveArchive(ctx context.Context, re
 	}
 
 	return res, nil
+
 }
 
 // PostCrmV3ObjectsDealsBatchCreateCreate - Create a batch of deals
@@ -263,7 +269,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchCreateCreate(ctx context.Context, requ
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/batch/create_create",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -300,7 +306,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchCreateCreate(ctx context.Context, requ
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -320,9 +326,11 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchCreateCreate(ctx context.Context, requ
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -385,6 +393,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchCreateCreate(ctx context.Context, requ
 	}
 
 	return res, nil
+
 }
 
 // PostCrmV3ObjectsDealsBatchUpdateUpdate - Update a batch of deals
@@ -393,7 +402,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx context.Context, requ
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/batch/update_update",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -430,7 +439,7 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx context.Context, requ
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -450,9 +459,11 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx context.Context, requ
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -515,4 +526,5 @@ func (s *Batch) PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx context.Context, requ
 	}
 
 	return res, nil
+
 }

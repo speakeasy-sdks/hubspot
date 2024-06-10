@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsSearchDoSearchSecurity) GetPrivateApps() *string {
 }
 
 type PostCrmV3ObjectsDealsSearchDoSearchResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	CollectionResponseWithTotalSimplePublicObjectForwardPaging *components.CollectionResponseWithTotalSimplePublicObjectForwardPaging
 	Body                                                       []byte

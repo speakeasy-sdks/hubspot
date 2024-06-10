@@ -12,6 +12,9 @@ import (
 
 func main() {
 	s := deals.New()
+	security := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+	}
 
 	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
@@ -28,13 +31,8 @@ func main() {
 	}
 
 	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
 	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, security, batchReadInputSimplePublicObjectID, archived)
 	if err != nil {
 		log.Fatal(err)
 	}

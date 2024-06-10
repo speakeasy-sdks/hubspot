@@ -27,9 +27,9 @@ func (o *PostCrmV3ObjectsDealsBatchReadReadSecurity) GetPrivateApps() *string {
 }
 
 type PostCrmV3ObjectsDealsBatchReadReadRequest struct {
-	BatchReadInputSimplePublicObjectID components.BatchReadInputSimplePublicObjectID `request:"mediaType=application/json"`
 	// Whether to return only results that have been archived.
-	Archived *bool `default:"false" queryParam:"style=form,explode=true,name=archived"`
+	Archived                           *bool                                         `default:"false" queryParam:"style=form,explode=true,name=archived"`
+	BatchReadInputSimplePublicObjectID components.BatchReadInputSimplePublicObjectID `request:"mediaType=application/json"`
 }
 
 func (p PostCrmV3ObjectsDealsBatchReadReadRequest) MarshalJSON() ([]byte, error) {
@@ -43,13 +43,6 @@ func (p *PostCrmV3ObjectsDealsBatchReadReadRequest) UnmarshalJSON(data []byte) e
 	return nil
 }
 
-func (o *PostCrmV3ObjectsDealsBatchReadReadRequest) GetBatchReadInputSimplePublicObjectID() components.BatchReadInputSimplePublicObjectID {
-	if o == nil {
-		return components.BatchReadInputSimplePublicObjectID{}
-	}
-	return o.BatchReadInputSimplePublicObjectID
-}
-
 func (o *PostCrmV3ObjectsDealsBatchReadReadRequest) GetArchived() *bool {
 	if o == nil {
 		return nil
@@ -57,8 +50,15 @@ func (o *PostCrmV3ObjectsDealsBatchReadReadRequest) GetArchived() *bool {
 	return o.Archived
 }
 
+func (o *PostCrmV3ObjectsDealsBatchReadReadRequest) GetBatchReadInputSimplePublicObjectID() components.BatchReadInputSimplePublicObjectID {
+	if o == nil {
+		return components.BatchReadInputSimplePublicObjectID{}
+	}
+	return o.BatchReadInputSimplePublicObjectID
+}
+
 type PostCrmV3ObjectsDealsBatchReadReadResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	BatchResponseSimplePublicObject *components.BatchResponseSimplePublicObject
 	// multiple statuses

@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsCreateSecurity) GetPrivateApps() *string {
 }
 
 type PostCrmV3ObjectsDealsCreateResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	SimplePublicObject *components.SimplePublicObject
 	Body               []byte

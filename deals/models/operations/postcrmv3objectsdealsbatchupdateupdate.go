@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsBatchUpdateUpdateSecurity) GetPrivateApps() *strin
 }
 
 type PostCrmV3ObjectsDealsBatchUpdateUpdateResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	BatchResponseSimplePublicObject *components.BatchResponseSimplePublicObject
 	// multiple statuses

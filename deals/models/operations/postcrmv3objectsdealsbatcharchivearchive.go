@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsBatchArchiveArchiveSecurity) GetPrivateApps() *str
 }
 
 type PostCrmV3ObjectsDealsBatchArchiveArchiveResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	Body     []byte
 }
 

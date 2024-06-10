@@ -14,22 +14,15 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsSearchDoSearchSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Search.PostCrmV3ObjectsDealsSearchDoSearch(ctx, components.PublicObjectSearchRequest{
+    request := components.PublicObjectSearchRequest{
         Limit: 378622,
         After: "<value>",
         Sorts: []string{
@@ -48,7 +41,13 @@ func main() {
                 },
             },
         },
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsSearchDoSearchSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Search.PostCrmV3ObjectsDealsSearchDoSearch(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }

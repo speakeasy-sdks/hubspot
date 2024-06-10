@@ -19,15 +19,17 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"context"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
+    security := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
 
     batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
         PropertiesWithHistory: []string{
@@ -44,13 +46,8 @@ func main() {
     }
 
     var archived *bool = deals.Bool(false)
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
     ctx := context.Background()
-    res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+    res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, security, batchReadInputSimplePublicObjectID, archived)
     if err != nil {
         log.Fatal(err)
     }
@@ -88,28 +85,27 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsBatchArchiveArchiveSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Batch.PostCrmV3ObjectsDealsBatchArchiveArchive(ctx, components.BatchInputSimplePublicObjectID{
+    request := components.BatchInputSimplePublicObjectID{
         Inputs: []components.SimplePublicObjectID{
             components.SimplePublicObjectID{
                 ID: "<id>",
             },
         },
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsBatchArchiveArchiveSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Batch.PostCrmV3ObjectsDealsBatchArchiveArchive(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }
@@ -146,22 +142,15 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsBatchCreateCreateSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Batch.PostCrmV3ObjectsDealsBatchCreateCreate(ctx, components.BatchInputSimplePublicObjectInputForCreate{
+    request := components.BatchInputSimplePublicObjectInputForCreate{
         Inputs: []components.SimplePublicObjectInputForCreate{
             components.SimplePublicObjectInputForCreate{
                 Associations: []components.PublicAssociationsForObject{
@@ -187,7 +176,13 @@ func main() {
                 },
             },
         },
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsBatchCreateCreateSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Batch.PostCrmV3ObjectsDealsBatchCreateCreate(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }
@@ -224,22 +219,15 @@ package main
 
 import(
 	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
 	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
 	"log"
 )
 
 func main() {
     s := deals.New()
-
-
-    operationSecurity := operations.PostCrmV3ObjectsDealsBatchUpdateUpdateSecurity{
-            Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-        }
-
-    ctx := context.Background()
-    res, err := s.Batch.PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx, components.BatchInputSimplePublicObjectBatchInput{
+    request := components.BatchInputSimplePublicObjectBatchInput{
         Inputs: []components.SimplePublicObjectBatchInput{
             components.SimplePublicObjectBatchInput{
                 IDProperty: deals.String("my_unique_property_name"),
@@ -254,7 +242,13 @@ func main() {
                 },
             },
         },
-    }, operationSecurity)
+    }
+
+    security := operations.PostCrmV3ObjectsDealsBatchUpdateUpdateSecurity{
+            Oauth2: deals.String("<YOUR_OAUTH2_HERE>"),
+        }
+    ctx := context.Background()
+    res, err := s.Batch.PostCrmV3ObjectsDealsBatchUpdateUpdate(ctx, request, security)
     if err != nil {
         log.Fatal(err)
     }

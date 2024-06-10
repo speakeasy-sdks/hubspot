@@ -33,7 +33,7 @@ func (s *Gdpr) PostCrmV3ObjectsDealsGdprDeletePurge(ctx context.Context, request
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/gdpr-delete_purge",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
@@ -55,7 +55,7 @@ func (s *Gdpr) PostCrmV3ObjectsDealsGdprDeletePurge(ctx context.Context, request
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -75,9 +75,11 @@ func (s *Gdpr) PostCrmV3ObjectsDealsGdprDeletePurge(ctx context.Context, request
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -117,4 +119,5 @@ func (s *Gdpr) PostCrmV3ObjectsDealsGdprDeletePurge(ctx context.Context, request
 	}
 
 	return res, nil
+
 }

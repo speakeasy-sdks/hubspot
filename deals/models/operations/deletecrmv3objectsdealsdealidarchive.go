@@ -37,7 +37,7 @@ func (o *DeleteCrmV3ObjectsDealsDealIDArchiveRequest) GetDealID() string {
 }
 
 type DeleteCrmV3ObjectsDealsDealIDArchiveResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	Body     []byte
 }
 

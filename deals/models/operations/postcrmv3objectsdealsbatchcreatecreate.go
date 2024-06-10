@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsBatchCreateCreateSecurity) GetPrivateApps() *strin
 }
 
 type PostCrmV3ObjectsDealsBatchCreateCreateResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	BatchResponseSimplePublicObject *components.BatchResponseSimplePublicObject
 	// multiple statuses

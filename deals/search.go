@@ -31,7 +31,7 @@ func (s *Search) PostCrmV3ObjectsDealsSearchDoSearch(ctx context.Context, reques
 		Context:        ctx,
 		OperationID:    "post-/crm/v3/objects/deals/search_doSearch",
 		OAuth2Scopes:   []string{},
-		SecuritySource: withSecurity(security),
+		SecuritySource: utils.AsSecuritySource(security),
 	}
 
 	o := operations.Options{}
@@ -68,7 +68,7 @@ func (s *Search) PostCrmV3ObjectsDealsSearchDoSearch(ctx context.Context, reques
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
 		return nil, err
 	}
 
@@ -88,9 +88,11 @@ func (s *Search) PostCrmV3ObjectsDealsSearchDoSearch(ctx context.Context, reques
 		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+		_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
+		} else if _httpRes != nil {
+			httpRes = _httpRes
 		}
 	} else {
 		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
@@ -141,4 +143,5 @@ func (s *Search) PostCrmV3ObjectsDealsSearchDoSearch(ctx context.Context, reques
 	}
 
 	return res, nil
+
 }

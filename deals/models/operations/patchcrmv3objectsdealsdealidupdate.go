@@ -26,10 +26,10 @@ func (o *PatchCrmV3ObjectsDealsDealIDUpdateSecurity) GetPrivateApps() *string {
 }
 
 type PatchCrmV3ObjectsDealsDealIDUpdateRequest struct {
-	DealID                  string                             `pathParam:"style=simple,explode=false,name=dealId"`
-	SimplePublicObjectInput components.SimplePublicObjectInput `request:"mediaType=application/json"`
+	DealID string `pathParam:"style=simple,explode=false,name=dealId"`
 	// The name of a property whose values are unique for this object type
-	IDProperty *string `queryParam:"style=form,explode=true,name=idProperty"`
+	IDProperty              *string                            `queryParam:"style=form,explode=true,name=idProperty"`
+	SimplePublicObjectInput components.SimplePublicObjectInput `request:"mediaType=application/json"`
 }
 
 func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetDealID() string {
@@ -39,13 +39,6 @@ func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetDealID() string {
 	return o.DealID
 }
 
-func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetSimplePublicObjectInput() components.SimplePublicObjectInput {
-	if o == nil {
-		return components.SimplePublicObjectInput{}
-	}
-	return o.SimplePublicObjectInput
-}
-
 func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetIDProperty() *string {
 	if o == nil {
 		return nil
@@ -53,8 +46,15 @@ func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetIDProperty() *string {
 	return o.IDProperty
 }
 
+func (o *PatchCrmV3ObjectsDealsDealIDUpdateRequest) GetSimplePublicObjectInput() components.SimplePublicObjectInput {
+	if o == nil {
+		return components.SimplePublicObjectInput{}
+	}
+	return o.SimplePublicObjectInput
+}
+
 type PatchCrmV3ObjectsDealsDealIDUpdateResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	// successful operation
 	SimplePublicObject *components.SimplePublicObject
 	Body               []byte

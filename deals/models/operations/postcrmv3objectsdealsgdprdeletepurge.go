@@ -26,7 +26,7 @@ func (o *PostCrmV3ObjectsDealsGdprDeletePurgeSecurity) GetPrivateApps() *string 
 }
 
 type PostCrmV3ObjectsDealsGdprDeletePurgeResponse struct {
-	HTTPMeta components.HTTPMetadata
+	HTTPMeta components.HTTPMetadata `json:"-"`
 	Body     []byte
 }
 
