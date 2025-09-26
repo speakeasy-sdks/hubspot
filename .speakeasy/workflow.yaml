@@ -1,8 +1,11 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     deals:
         inputs:
             - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/deals
+        registry:
+            location: registry.speakeasyapi.dev/tcr-new-workspace-2/tcr-new-workspace-2/deals
 targets:
     deals:
         target: go

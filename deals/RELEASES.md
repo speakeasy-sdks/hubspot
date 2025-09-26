@@ -7,3 +7,13 @@ Based on:
 - Speakeasy CLI 1.210.0 (2.281.2) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [go v0.0.1] ./deals
+
+## 2025-09-26 01:56:47
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.630.0 (2.716.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.1.0] deals
+### Releases
+- [Go v0.1.0] https://github.com/speakeasy-sdks/hubspot/releases/tag/deals/v0.1.0 - deals

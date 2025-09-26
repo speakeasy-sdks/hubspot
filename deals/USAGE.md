@@ -11,30 +11,24 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := deals.New()
 
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
 		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
+		Inputs: []components.SimplePublicObjectID{},
 		Properties: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
 		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	}, deals.Pointer(false))
 	if err != nil {
 		log.Fatal(err)
 	}
