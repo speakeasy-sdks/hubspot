@@ -16,11 +16,37 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 - [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/productionize-sdks/publish-sdks)
 - [ ] ✨ When ready to productionize, delete this section from the README
 
+<!-- Start Summary [summary] -->
+## Summary
+
+
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [openapi](#openapi)
+  * [🏗 **Welcome to your new SDK!** 🏗](#welcome-to-your-new-sdk)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
+
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+To add the SDK as a dependency to your project:
 ```bash
-go get github.com/speakeasy-sdks/hubspot/deals
+go get github.com/speakeasy-sdks/hubspot-go/deals
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -41,30 +67,24 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := deals.New()
 
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
 		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
+		Inputs: []components.SimplePublicObjectID{},
 		Properties: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
 		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	}, deals.Pointer(false))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -79,12 +99,8 @@ func main() {
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [Batch](docs/sdks/batch/README.md)
-
-* [PostCrmV3ObjectsDealsBatchReadRead](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchreadread) - Read a batch of deals by internal ID, or unique property values
-* [PostCrmV3ObjectsDealsBatchArchiveArchive](docs/sdks/batch/README.md#postcrmv3objectsdealsbatcharchivearchive) - Archive a batch of deals by ID
-* [PostCrmV3ObjectsDealsBatchCreateCreate](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchcreatecreate) - Create a batch of deals
-* [PostCrmV3ObjectsDealsBatchUpdateUpdate](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchupdateupdate) - Update a batch of deals
+<details open>
+<summary>Available methods</summary>
 
 ### [Basic](docs/sdks/basic/README.md)
 
@@ -94,27 +110,154 @@ func main() {
 * [GetCrmV3ObjectsDealsGetPage](docs/sdks/basic/README.md#getcrmv3objectsdealsgetpage) - List
 * [PostCrmV3ObjectsDealsCreate](docs/sdks/basic/README.md#postcrmv3objectsdealscreate) - Create
 
-### [PublicObject](docs/sdks/publicobject/README.md)
+### [Batch](docs/sdks/batch/README.md)
 
-* [PostCrmV3ObjectsDealsMergeMerge](docs/sdks/publicobject/README.md#postcrmv3objectsdealsmergemerge) - Merge two deals with same type
+* [PostCrmV3ObjectsDealsBatchReadRead](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchreadread) - Read a batch of deals by internal ID, or unique property values
+* [PostCrmV3ObjectsDealsBatchArchiveArchive](docs/sdks/batch/README.md#postcrmv3objectsdealsbatcharchivearchive) - Archive a batch of deals by ID
+* [PostCrmV3ObjectsDealsBatchCreateCreate](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchcreatecreate) - Create a batch of deals
+* [PostCrmV3ObjectsDealsBatchUpdateUpdate](docs/sdks/batch/README.md#postcrmv3objectsdealsbatchupdateupdate) - Update a batch of deals
 
 ### [Gdpr](docs/sdks/gdpr/README.md)
 
 * [PostCrmV3ObjectsDealsGdprDeletePurge](docs/sdks/gdpr/README.md#postcrmv3objectsdealsgdprdeletepurge) - GDPR DELETE
 
+
+### [PublicObject](docs/sdks/publicobject/README.md)
+
+* [PostCrmV3ObjectsDealsMergeMerge](docs/sdks/publicobject/README.md#postcrmv3objectsdealsmergemerge) - Merge two deals with same type
+
 ### [Search](docs/sdks/search/README.md)
 
 * [PostCrmV3ObjectsDealsSearchDoSearch](docs/sdks/search/README.md#postcrmv3objectsdealssearchdosearch)
+
+</details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a `retry.Config` object to the call by using the `WithRetries` option:
+```go
+package main
+
+import (
+	"context"
+	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
+	"github.com/speakeasy-sdks/hubspot-go/deals/retry"
+	"log"
+	"models/operations"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := deals.New()
+
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
+		PropertiesWithHistory: []string{
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
+		},
+		Inputs: []components.SimplePublicObjectID{},
+		Properties: []string{
+			"<value 1>",
+			"<value 2>",
+		},
+	}, deals.Pointer(false), operations.WithRetries(
+		retry.Config{
+			Strategy: "backoff",
+			Backoff: &retry.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.BatchResponseSimplePublicObject != nil {
+		// handle response
+	}
+}
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `WithRetryConfig` option at SDK initialization:
+```go
+package main
+
+import (
+	"context"
+	"github.com/speakeasy-sdks/hubspot-go/deals"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
+	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
+	"github.com/speakeasy-sdks/hubspot-go/deals/retry"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := deals.New(
+		deals.WithRetryConfig(
+			retry.Config{
+				Strategy: "backoff",
+				Backoff: &retry.BackoffStrategy{
+					InitialInterval: 1,
+					MaxInterval:     50,
+					Exponent:        1.1,
+					MaxElapsedTime:  100,
+				},
+				RetryConnectionErrors: false,
+			}),
+	)
+
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
+		PropertiesWithHistory: []string{
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
+		},
+		Inputs: []components.SimplePublicObjectID{},
+		Properties: []string{
+			"<value 1>",
+			"<value 2>",
+		},
+	}, deals.Pointer(false))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.BatchResponseSimplePublicObject != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or an error, they will never return both.
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+By Default, an API error will return `sdkerrors.SDKError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
+
+For example, the `PostCrmV3ObjectsDealsBatchReadRead` function may return the following errors:
+
+| Error Type         | Status Code | Content Type |
+| ------------------ | ----------- | ------------ |
+| sdkerrors.SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -132,30 +275,24 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := deals.New()
 
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
 		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
+		Inputs: []components.SimplePublicObjectID{},
 		Properties: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
 		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	}, deals.Pointer(false))
 	if err != nil {
 
 		var e *sdkerrors.SDKError
@@ -172,68 +309,9 @@ func main() {
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
-
-You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.hubapi.com` | None |
-
-#### Example
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/speakeasy-sdks/hubspot-go/deals"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/components"
-	"github.com/speakeasy-sdks/hubspot-go/deals/models/operations"
-	"log"
-)
-
-func main() {
-	s := deals.New(
-		deals.WithServerIndex(0),
-	)
-
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
-		PropertiesWithHistory: []string{
-			"<value>",
-		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
-		Properties: []string{
-			"<value>",
-		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if res.BatchResponseSimplePublicObject != nil {
-		// handle response
-	}
-}
-
-```
-
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+The default server can be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
 ```go
 package main
 
@@ -246,32 +324,26 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := deals.New(
 		deals.WithServerURL("https://api.hubapi.com"),
 	)
 
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
+		Oauth2: deals.Pointer("<YOUR_OAUTH2_HERE>"),
+	}, components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
 		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
+		Inputs: []components.SimplePublicObjectID{},
 		Properties: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
 		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	}, deals.Pointer(false))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -300,12 +372,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/speakeasy-sdks/hubspot-go/deals"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = deals.New(deals.WithClient(httpClient))
 )
 ```
 
@@ -319,9 +392,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `Oauth2`     | oauth2       | OAuth2 token |
+| Name     | Type   | Scheme       |
+| -------- | ------ | ------------ |
+| `Oauth2` | oauth2 | OAuth2 token |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 
@@ -341,30 +414,22 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := deals.New()
 
-	batchReadInputSimplePublicObjectID := components.BatchReadInputSimplePublicObjectID{
+	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{}, components.BatchReadInputSimplePublicObjectID{
 		PropertiesWithHistory: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
+			"<value 3>",
 		},
-		Inputs: []components.SimplePublicObjectID{
-			components.SimplePublicObjectID{
-				ID: "<id>",
-			},
-		},
+		Inputs: []components.SimplePublicObjectID{},
 		Properties: []string{
-			"<value>",
+			"<value 1>",
+			"<value 2>",
 		},
-	}
-
-	var archived *bool = deals.Bool(false)
-
-	operationSecurity := operations.PostCrmV3ObjectsDealsBatchReadReadSecurity{
-		Oauth2: deals.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
-	}
-
-	ctx := context.Background()
-	res, err := s.Batch.PostCrmV3ObjectsDealsBatchReadRead(ctx, operationSecurity, batchReadInputSimplePublicObjectID, archived)
+	}, deals.Pointer(false))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -375,12 +440,6 @@ func main() {
 
 ```
 <!-- End Authentication [security] -->
-
-<!-- Start Special Types [types] -->
-## Special Types
-
-
-<!-- End Special Types [types] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

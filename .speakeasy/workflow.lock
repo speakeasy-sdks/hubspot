@@ -1,0 +1,30 @@
+speakeasyVersion: 1.634.2
+sources:
+    deals:
+        sourceNamespace: deals
+        sourceRevisionDigest: sha256:eb25d291c9b0204ae76b59195cfd17976b51134259b9868475a5e7ed43d9a837
+        sourceBlobDigest: sha256:7d97818345f59b6adbb40d77bc9d5a09cf91b3829804f94aba0c8a51bf125029
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1758851962
+            - v3
+targets:
+    deals:
+        source: deals
+        sourceNamespace: deals
+        sourceRevisionDigest: sha256:eb25d291c9b0204ae76b59195cfd17976b51134259b9868475a5e7ed43d9a837
+        sourceBlobDigest: sha256:7d97818345f59b6adbb40d77bc9d5a09cf91b3829804f94aba0c8a51bf125029
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        deals:
+            inputs:
+                - location: https://api.hubspot.com/api-catalog-public/v1/apis/crm/v3/objects/deals
+            registry:
+                location: registry.speakeasyapi.dev/tcr-new-workspace-2/tcr-new-workspace-2/deals
+    targets:
+        deals:
+            target: go
+            source: deals
+            output: ./deals
